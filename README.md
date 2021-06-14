@@ -1,6 +1,5 @@
 # School-Projects
 
-For more info:   
 https://www.cmpe.boun.edu.tr/undergraduate/curriculum  
 
  | Course Name | Course Description | Topics |
