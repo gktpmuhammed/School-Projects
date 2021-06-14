@@ -1,0 +1,14 @@
+SIGTERM P5
+wait 2
+SIGTERM P4
+wait 2
+SIGTERM P3
+wait 2
+SIGTERM P2
+wait 2
+SIGTERM P1
+wait 2
+SIGTERM P1
+wait 2
+SIGTERM P5
+wait 2

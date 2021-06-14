@@ -1,0 +1,3 @@
+P1 is started and it has a pid of 4651
+P2 is started and it has a pid of 4654
+Watchdog is terminating gracefully

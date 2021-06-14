@@ -1,0 +1,4 @@
+SIGINT P30
+wait 2
+SIGTERM P1
+wait 5

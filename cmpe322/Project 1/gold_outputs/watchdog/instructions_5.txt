@@ -1,0 +1,35 @@
+P1 is started and it has a pid of 4586
+P2 is started and it has a pid of 4589
+P3 is started and it has a pid of 4590
+P4 is started and it has a pid of 4591
+P5 is started and it has a pid of 4592
+P5 is killed
+Restarting P5
+P5 is started and it has a pid of 4593
+P4 is killed
+Restarting P4
+P4 is started and it has a pid of 4594
+P3 is killed
+Restarting P3
+P3 is started and it has a pid of 4595
+P2 is killed
+Restarting P2
+P2 is started and it has a pid of 4596
+P1 is killed, all processes must be killed
+Restarting all processes
+P1 is started and it has a pid of 4597
+P2 is started and it has a pid of 4598
+P3 is started and it has a pid of 4599
+P4 is started and it has a pid of 4600
+P5 is started and it has a pid of 4601
+P1 is killed, all processes must be killed
+Restarting all processes
+P1 is started and it has a pid of 4603
+P2 is started and it has a pid of 4604
+P3 is started and it has a pid of 4605
+P4 is started and it has a pid of 4606
+P5 is started and it has a pid of 4607
+P5 is killed
+Restarting P5
+P5 is started and it has a pid of 4608
+Watchdog is terminating gracefully

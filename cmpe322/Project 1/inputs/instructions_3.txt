@@ -1,0 +1,14 @@
+SIGHUP P2
+wait 1
+SIGINT P3
+wait 3
+SIGILL P4
+wait 4
+SIGTRAP P5
+wait 2
+SIGFPE P6
+wait 1
+SIGSEGV P7
+wait 1
+SIGXCPU P8
+wait 1

@@ -1,0 +1,9 @@
+P1 is started and it has a pid of 3957
+P2 is started and it has a pid of 3960
+P3 is started and it has a pid of 3961
+P4 is started and it has a pid of 3962
+P5 is started and it has a pid of 3963
+P6 is started and it has a pid of 3964
+P7 is started and it has a pid of 3965
+P8 is started and it has a pid of 3966
+Watchdog is terminating gracefully

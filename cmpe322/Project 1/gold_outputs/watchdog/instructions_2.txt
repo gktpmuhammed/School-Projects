@@ -1,0 +1,12 @@
+P1 is started and it has a pid of 3903
+P2 is started and it has a pid of 3905
+P3 is started and it has a pid of 3906
+P1 is killed, all processes must be killed
+Restarting all processes
+P1 is started and it has a pid of 3912
+P2 is started and it has a pid of 3917
+P3 is started and it has a pid of 3918
+P3 is killed
+Restarting P3
+P3 is started and it has a pid of 3920
+Watchdog is terminating gracefully
