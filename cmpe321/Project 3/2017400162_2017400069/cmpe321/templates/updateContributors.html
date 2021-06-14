@@ -1,0 +1,25 @@
+{% if error %}
+<p class="error"><strong>Error:</strong> {{ error }}
+    {% endif %}
+<h1>Information about this reaction</h1>
+<table border="1" cellpadding="5" cellspacing="5">
+    {% for row in data %}
+    <tr>
+        {% for d in row %}
+        <td>{{ d }}</td>
+        {% endfor %}
+    </tr>
+    {% endfor %}
+</table>
+<h1>Remove author</h1>
+<form id='form1' method="post">
+    Username <input type="string" , name="username" />
+    <br>
+    Password <input type="string" , name="password" />
+    <br>
+    Author Name <input type="string" , name="author name" />
+    <br>
+    <input type="submit" name="action" value="add contributor">
+    <br>
+    <input type="submit" name="action" value="delete contributor">
+</form>

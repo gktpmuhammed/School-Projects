@@ -1,0 +1,14 @@
+Antonio,Giovinazzi,Switzerland,0,5
+Kimi,Raikkonen,Switzerland,103,1
+George,Russell,England,0,9
+Nicholas,Latifi,England,0,11
+Esteban,Ocon,England,1,2
+Lando,Norris,England,1,3
+Lance,Stroll,England,3,3
+Sergio,Perez,England,10,1
+Daniel,Ricciardo,England,31,1
+Max,Verstappen,England,42,1
+Valtteri,Bottas,England,56,1
+Fernando,Alonso,England,97,1
+Sebastian,Vettel,England,121,1
+Lewis,Hamilton,England,165,1

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>DTbank</title>
+</head>
+
+<body>
+    <h1>Please enter your informations</h1>
+    <form method="post">
+        Username <input type="string" , name="username" />
+        <br>
+        Password <input type="string" , name="password" />
+        <br>
+        <input type="submit">
+    </form>
+    {% if error %}
+    <p class="error"><strong>Error:</strong> {{ error }}
+        {% endif %}
+
+
+</body>
+
+</html>

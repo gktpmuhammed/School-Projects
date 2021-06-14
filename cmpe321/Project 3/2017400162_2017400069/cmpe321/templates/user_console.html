@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>DTbank</title>
+</head>
+
+<body>
+    <h1>R8: See all drugs and thier descriptions</h1>
+    <form id='form1' method="POST">
+        <input type="submit" name="action" value="see_drugs">
+    </form>
+    {% if error %}
+    <p class="error"><strong>Error:</strong> {{ error }}
+        {% endif %}
+        <!-- -----------------------------Write your comments here ------------------------------------>
+    <h1>R9: See interactions of a drug</h1>
+    <form id='form2' method="POST">
+        Drug ID <input type="string" , name="drug_id" />
+        <br>
+        <input type="submit" name="action" value="see_interaction_of_drug">
+    </form>
+    {% if error %}
+    <p class="error"><strong>Error:</strong> {{ error }}
+        {% endif %}
+        <!-- -----------------------------Write your comments here ------------------------------------>
+    <h1>R10: See side effects of a drug</h1>
+    <form id='form3' method="POST">
+        Drug ID <input type="string" , name="drug_id" />
+        <br>
+        <input type="submit" name="action" value="see_side_effects_of_drug">
+    </form>
+    {% if error %}
+    <p class="error"><strong>Error:</strong> {{ error }}
+        {% endif %}
+        <!-- -----------------------------Write your comments here ------------------------------------>
+    <h1>R11: See interacting targets of a drug</h1>
+    <form id='form4' method="POST">
+        Drug ID <input type="string" , name="drug_id" />
+        <br>
+        <input type="submit" name="action" value="see_interacting_targets_of_drug">
+    </form>
+    {% if error %}
+    <p class="error"><strong>Error:</strong> {{ error }}
+        {% endif %}
+        <!-- -----------------------------Write your comments here ------------------------------------>
+    <h1>R12: See interacting drugs of a protein</h1>
+    <form id='form5' method="POST">
+        Protein ID <input type="string" , name="protein_id" />
+        <br>
+        <input type="submit" name="action" value="see_interacting_drugs_of_protein">
+    </form>
+    {% if error %}
+    <p class="error"><strong>Error:</strong> {{ error }}
+        {% endif %}
+        <!-------------------------------Write your comments here ------------------------------------>
+    <h1>R13: See drugs that affect the same protein</h1>
+    <form id='form6' method="POST">
+        <input type="submit" name="action" value="see_drugs_that_affect_same_protein">
+    </form>
+    {% if error %}
+    <p class="error"><strong>Error:</strong> {{ error }}
+        {% endif %}
+        <!-------------------------------Write your comments here ------------------------------------>
+    <h1>R14: See proteins that bind the same drug</h1>
+    <form id='form7' method="POST">
+        <input type="submit" name="action" value="see_proteins_that_bind_the_same_drug">
+    </form>
+    {% if error %}
+    <p class="error"><strong>Error:</strong> {{ error }}
+        {% endif %}
+        <!-------------------------------Write your comments here ------------------------------------>
+    <h1>R15: See drugs that have a specifc side effect.</h1>
+    <form id='form8' method="POST">
+        Side Effect ID <input type="string" , name="side_effect_id" />
+        <br>
+        <input type="submit" name="action" value="see_drugs_that_have_specifc_side_effect">
+    </form>
+    {% if error %}
+    <p class="error"><strong>Error:</strong> {{ error }}
+        {% endif %}
+        <!-------------------------------Write your comments here ------------------------------------>
+    <h1>R16: See drugs that have a specifc keyword.</h1>
+    <form id='form9' method="POST">
+        Keyword <input type="string" , name="keyword" />
+        <br>
+        <input type="submit" name="action" value="drug_with_keyword">
+    </form>
+    {% if error %}
+    <p class="error"><strong>Error:</strong> {{ error }}
+        {% endif %}
+        <!-------------------------------Write your comments here ------------------------------------>
+    <h1>R17: See drugs with least amount of side effects.</h1>
+    <form id='form10' method="POST">
+        Protein ID <input type="string" , name="protein_id" />
+        <br>
+        <input type="submit" name="action" value="least_side_effect">
+    </form>
+    {% if error %}
+    <p class="error"><strong>Error:</strong> {{ error }}
+        {% endif %}
+        <!-------------------------------Write your comments here ------------------------------------>
+    <h1>R18: See article doi and contributors.</h1>
+    <form id='form11' method="POST">
+        <input type="submit" name="action" value="articles">
+    </form>
+    {% if error %}
+    <p class="error"><strong>Error:</strong> {{ error }}
+        {% endif %}
+        <!-------------------------------Write your comments here ------------------------------------>
+    <h1>R19: See institutes with scores.</h1>
+    <form id='form11' method="POST">
+        <input type="submit" name="action" value="scores">
+    </form>
+    {% if error %}
+    <p class="error"><strong>Error:</strong> {{ error }}
+        {% endif %}
+        <!-------------------------------Write your comments here ------------------------------------>
+    <h1>R20: Filter interacting targets.</h1>
+    <form id='form13' method="POST">
+        Drug ID <input type="string" , name="drug_id" />
+        <br>
+        Measurement Type <input type="string" , name="measurement_type" />
+        <br>
+        Lower Bound of Affinity <input type="string" , name="low_affinity" />
+        <br>
+        Higher Bound of Affinity <input type="string" , name="high_affinity" />
+        <br>
+        <input type="submit" name="action" value="filter">
+    </form>
+    {% if error %}
+    <p class="error"><strong>Error:</strong> {{ error }}
+        {% endif %}
+        <!-------------------------------Write your comments here ------------------------------------>
+</body>
+
+</html>

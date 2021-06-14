@@ -1,0 +1,3 @@
+SELECT Drivers.first_name, Drivers.last_name, Teams.base_location, Drivers.total_podiums, Drivers.driver_hrf FROM Drivers INNER JOIN Teams ON Drivers.team = Teams.team_id WHERE Drivers.team IN (SELECT Teams.team_id FROM Teams WHERE Teams.base_location like '%LAND') ORDER BY Teams.base_location DESC, Drivers.total_podiums ASC, Drivers.driver_hrf ASC;
+
+-- First we found the teams base_location that ends with "LAND" and from these teams we select all drivers in these teams. Then we sort the list of drivers based on some fields by ascending or descending order. 

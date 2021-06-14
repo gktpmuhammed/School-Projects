@@ -1,0 +1,79 @@
+﻿umls_cui;drugbank_id;side_effect_name
+C0000729;DB00136;Abdominal cramps
+C0000737;DB00136;Abdominal pain
+C0001925;DB00136;Albuminuria
+C0002792;DB00136;Anaphylactic shock
+C0003123;DB00136;Anorexia
+C0002792;DB00152;Anaphylactic shock
+C0002994;DB00152;Angioedema
+C0004093;DB00152;Asthenia
+C0010520;DB00152;Cyanosis
+C0019080;DB00152;Haemorrhage
+C0020458;DB00152;Hyperhidrosis
+C0020517;DB00152;Hypersensitivity
+C0002622;DB00271;Amnesia
+C0002871;DB00271;Anaemia
+C0002792;DB00271;Anaphylactic shock
+C0036572;DB00485;Convulsion
+C0027707;DB00485;Nephritis interstitial
+C0027947;DB00485;Neutropenia
+C0030193;DB00485;Pain
+C0030312;DB00485;Pancytopenia
+C0031542;DB00485;Phlebitis
+C0033687;DB00485;Proteinuria
+C0033774;DB00485;Pruritus
+C0035078;DB00485;Renal failure
+C0036830;DB00485;Serum sickness
+C0036974;DB00485;Shock
+C0037383;DB00485;Sneezing
+C0018939;DB00649;Blood disorder
+C0018378;DB00649;Guillain-Barre syndrome
+C0018418;DB00649;Gynaecomastia
+C0018965;DB00649;Haematuria
+C0018681;DB00649;Headache
+C0019158;DB00649;Hepatitis
+C0019163;DB00649;Hepatitis B
+C0018799;DB00704;Cardiac disorder
+C0018802;DB00704;Cardiac failure congestive
+C0018681;DB00704;Headache
+C0687713;DB00842;Gastrointestinal pain
+C2830004;DB00842;Somnolence
+C0000737;DB00879;Abdominal pain
+C0002871;DB00879;Anaemia
+C0002994;DB00879;Angioedema
+C0003467;DB00879;Anxiety
+C0003862;DB00879;Arthralgia
+C0004093;DB00879;Asthenia
+C0004364;DB00879;Autoimmune disorder
+C0853034;DB00879;Blood creatine phosphokinase increased
+C0853692;DB00879;Blood triglycerides increased
+C0860801;DB00879;Glucose low
+C0917801;DB00879;Insomnia
+C0001125;DB00879;Lactic acidosis
+C0877192;DB00879;Lipodystrophy acquired
+C0948594;DB00879;Musculoskeletal discomfort
+C0948586;DB00879;Protein urine present
+C0020580;DB00990;Hypoaesthesia
+C0021053;DB00990;Immune system disorder
+C0023530;DB00990;Leukopenia
+C0023895;DB00990;Liver disorder
+C0037763;DB01132;Muscle spasms
+C0035243;DB01132;Respiratory tract infection
+C0037199;DB01132;Sinusitis
+C0037274;DB01132;Skin disorder
+C0687713;DB01220;Gastrointestinal pain
+C0600142;DB01220;Hot flush
+C0851341;DB01220;Infestation NOS
+C0549373;DB01220;Laryngeal pain
+C0555724;DB01220;Lip dry
+C0858259;DB01220;Nasal discomfort
+C0853254;DB01220;Nasal passage irritation
+C0858635;DB01220;Pharyngolaryngeal pain
+C0700590;DB01220;Sweating increased
+C0853034;DB06335;Blood creatine phosphokinase increased
+C0853692;DB06335;Blood triglycerides increased
+C0687713;DB06335;Gastrointestinal pain
+C0750016;DB06335;Generalized urticaria
+C1384353;DB06335;Infestation
+C0851341;DB06335;Infestation NOS
+C0948594;DB06335;Musculoskeletal discomfort

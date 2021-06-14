@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>DTbank</title>
+</head>
+
+<body>
+    {% if error %}
+    <p class="error"><strong>Error:</strong> {{ error }}
+        {% endif %}
+    <h1>R6: See all drugs and their descriptions</h1>
+    <form id='form6' method="POST">
+        <input type="submit" name="action" value="see drugs">
+    </form>
+    <h1>R6: See all proteins</h1>
+    <form id='form7' method="POST">
+        <input type="submit" name="action" value="see proteins">
+    </form>
+    <h1>R6: See all side effects</h1>
+    <form id='form8' method="POST">
+        <input type="submit" name="action" value="see side effects">
+    </form>
+    <h1>R6: See all users</h1>
+    <form id='form9' method="POST">
+        <input type="submit" name="action" value="see users">
+    </form>
+    <h1>R6: See all papers and their contributers</h1>
+    <form id='form10' method="POST">
+        <input type="submit" name="action" value="see contributors">
+    </form>
+    <h1>R6: See Drug Target Interactions</h1>
+    <form id='form11' method="post">
+        <input type="submit" name="action" value="see_drug_target_interaction">
+    </form>
+    <h1>R2: Add new user to the database</h1>
+    <form id='form1' method="post">
+        Name <input type="string" , name="name" />
+        <br>
+        Username <input type="string" , name="username" />
+        <br>
+        Password <input type="string" , name="password" />
+        <br>
+        Institution <input type="string" , name="institution" />
+        <br>
+        <input type="submit" name="action" value="add user">
+    </form>
+    <h1>R3: Change affinity of reaction</h1>
+    <form id='form2' method="post">
+        Reaction id <input type="integer" , name="reaction_id" />
+        <br>
+        Affinity <input type="string" , name="affinity" />
+        <br>
+        <input type="submit" name="action" value="change affinity">
+    </form>
+    <h1>R3: Delete Drug</h1>
+    <form id='form3' method="post">
+        Drugbank id: <input type="integer" , name="drugbank_id" />
+        <br>
+        <input type="submit" name="action" value="delete drug">
+    </form>
+    <h1>R4: Delete Protein</h1>
+    <form id='form4' method="post">
+        Uniprot id <input type="integer" , name="uniprot_id" />
+        <br>
+        <input type="submit" name="action" value="delete protein">
+    </form>
+    <h1>R5: Update Contributors</h1>
+    <form id='form5' method="post">
+        Reaction id <input type="integer" , name="reaction_id" />
+        <br>
+        <input type="submit" name="action" value="update contributors">
+    </form>
+
+
+
+
+
+</body>
+
+</html>

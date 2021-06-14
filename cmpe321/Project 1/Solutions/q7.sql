@@ -1,0 +1,4 @@
+SELECT Tracks.circuit_type, CAST(sum(Tracks.clim * Tracks.total_laps) as FLOAT)/1000 as total_length  FROM Tracks WHERE Tracks.circuit_country NOT like 'Italy' AND Tracks.circuit_country like '%A%' GROUP by Tracks.circuit_type ORDER by total_length DESC;
+
+-- using "like" keyword we can compare the strings. As you can see circuit_country should not be Italy and must contain "A" letter in it. So we found tracks and then we multiplied the clim and total_laps to find the length of the track.
+-- We grouped the circuits by their circuit_type and summed the total length of the tracks. Lastly, we sort them in descending order by their total length.

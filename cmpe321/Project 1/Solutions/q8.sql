@@ -1,0 +1,5 @@
+SELECT Teams.team_id, Teams.short_name, Teams.full_name, CAST(sum(Tracks.clim * Tracks.total_laps) as FLOAT)/1000 as total_length FROM Teams JOIN Drivers ON (Teams.driver_one = Drivers.driver_id OR Teams.driver_two = Drivers.driver_id) INNER JOIN Tracks on (Drivers.driver_id = Tracks.lap_recorder)  WHERE(Drivers.country_of_birth not like 'England') GROUP by Teams.team_id HAVING total_length > 500 ORDER by total_length ASC;
+
+-- First we joined the Teams table with Drivers table by using driver_one and driver_two as FOREIGN KEY to compare the driver_id. And then we joined Tracks table using lap_recorder as a FOREIGN key to Drivers table who was not born in England. 
+-- And we grouped the drivers based on their teams and sum the track lengths which they have a record and converted the total length to the kilometers. THEN we selected the teams that has a record with more than 500 kilometers.
+-- Lastly we sort them based on total_length that they have a record. 

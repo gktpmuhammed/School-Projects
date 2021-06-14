@@ -1,0 +1,3 @@
+2,Red Bull Racing,Red Bull Racing Honda,566.618
+6,Ferrari,Scuderia Mission Winnow Ferrari,921.459
+1,Mercedes,Mercedes-AMG Petronas F1 Team,1224.969

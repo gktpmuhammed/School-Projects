@@ -1,0 +1,6 @@
+Alfa Romeo Racing,103,0
+AlphaTauri,2,0
+Alpine,97,1
+Aston Martin,121,3
+Ferrari,12,2
+McLaren,31,1
