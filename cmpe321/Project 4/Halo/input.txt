@@ -1,0 +1,32 @@
+create type animal 4 name age height weight
+inherit type human animal alias occupation
+create record human 3 MarkWebbler 27 178 81 Shadow engineer
+list record human
+list record animal
+create type animal
+create record human 1 JaneBradley 24 171 61 Leaf doctor
+list record human
+create record human 2 JonathanByn 20 190 88 Raw mechanic
+list record human
+inherit type kitunian animal color fangCount
+create record kitunian 5 MrsEvangeline 2 40 3 black 4 
+create record kitunian 8 MrEvangeline 1 32 2 black 2 
+create record kitunian 6 RopeHunter 2 38 4 blue 4 
+create record kitunian 1 Findik 1 20 1 yellow 0 
+create record kitunian 11 Meercat 3 43 4 blue 6 
+list record kitunian
+filter record human age>21
+update record human 2 JonathanByn 30 190 83 Raw mechanic
+list type
+search record kitunian 1
+inherit type centifyren animal flameColor
+create record centifyren 7 CFG7 2 100 4 golden
+create record centifyren 3 CFB3 3 140 7 black
+list record centifyren
+delete record centifyren 7
+list record centifyren
+list type
+delete type centifyren
+list type
+delete type centifyren
+delete record kitunian 9

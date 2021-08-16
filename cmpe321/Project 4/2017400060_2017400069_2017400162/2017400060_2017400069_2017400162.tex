@@ -1,0 +1,253 @@
+\documentclass{article}
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage{graphicx}
+\usepackage{algorithm}
+\usepackage{algorithm2e}
+\usepackage{hyperref}
+\usepackage{float}
+\usepackage[]{algorithm2e}
+%  Include course name, semester, assignment title, your name and student number. 
+\title{Cmpe321 Project Halo Report}
+\date{\today}
+\author{Erencan Uysal - 2017400069\\Muhammed Göktepe - 2017400162 \\ Emir Hıfsı Öztoprak - 2017400060}
+\begin{document}
+\maketitle
+\newpage
+\tableofcontents
+\newpage
+\section{Introduction}
+\label{sec:introduction}
+In this project we designed a database storage management system. This system has records, pages, files and headers for these structures. These structures help us to efficiently handle storage and search operations. This system supports create, delete, inherit and list operations for type; create, delete, search, update, list and filter operations for records.   
+\section{Assumptions \& Constraints}
+\label{sec:ass-and-const}
+ 
+\subsection{Assumptions}
+\begin{itemize}
+    \item Each field has 20 byte space.
+    \item Each page has 2 kb (2048 byte) space.
+    \item A file has 8 pages in it.
+    \item All fields are alphanumeric.
+    \item User always enters valid input.
+    \item Each field must have a value. So there is no null value for any field.
+    \item We assumed that the inputs are given in correct form.
+\item We assumed the input lines are given line by line.
+\item We assumed the condition for the filter operations is given in "age$<$20" form with no spaces in between.
+\end{itemize}
+\subsection{Constraints}
+\begin{enumerate}
+    \item The data must be organized in pages and pages must contain records. (We can not implement this in this project due to limited time.)
+    \item You are not allowed to store all pages in the same file and a file must contain multiple pages. This means that your system must be able to create new files as HALO grows. Moreover, when a file becomes free due to deletions, that file must be deleted.(We can not implement this in this project due to limited time.)
+    \item Although a file contains multiple pages, it must read page by page when it is needed. Loading the whole file to RAM is not allowed.(We can not implement this in this project due to limited time.)
+    \item The first attribute of all types in HALO software must be a string type, named as "planet" and its value for all records must be "E226 - S187".
+    \item The primary key of a record should be assumed to be the value of the second field of that record.
+    \item Records in the files should be stored in descending order according to their primary keys.
+\end{enumerate}
+
+\section{Storage Structures}
+\label{sec:structures}
+ \subsection{System Catalogue}
+ System catalogue gives us necessary information about main situation of our database storage system. We used a .txt file as system catalogue. We used this file frequently in control mechanism of our system. For example we controlled type names whether they already exist before creating a new type. We add information related to created types to our system catalogue. We did not add planet and record id fields to our system catalogue because they are common in all types. System catalogue holds:
+ \begin{itemize}
+ \item Types
+ \item Number of fields for each type
+ \item Names of fields for each type
+ \item Number of created files for each type
+ \end{itemize}
+ \begin{figure}[H]
+    \centering
+    \includegraphics[width=.8\textwidth]{systemcatalog.png}
+    \caption{System catalogue}
+\end{figure}
+\begin{table}[H]
+\centering
+\begin{tabular}{|l|c|c|c}
+\hline
+\textbf{System Catalogue}   & \multicolumn{1}{l|}{\textbf{Field 1}} & \multicolumn{1}{l|}{\textbf{Field...}} & \multicolumn{1}{l|}{\textbf{File Count}} \\ \hline
+\textbf{Type 1} & $name$         & $age$          & $0$           \\ \hline
+\textbf{Type 2} & $name$         & $weight$          & $5$           \\ \hline
+\textbf{Type 3} & $password$         & $age$          & $1$           \\ \hline
+\end{tabular}
+\label{tab:ex}
+\caption{System Catalogue}
+\end{table}
+\subsection{Record}
+For each type, we should make calculations. We are assuming each field is 20 byte. Also we have a record header for each record. We stored record header in 20 bytes. So, each record occupies (number of field + 1) times 20 bytes.If a type has 4 fields, then we should have 20*5=100 bytes for each record. Record header holds record id. We can easily sort records in this way.
+\begin{table}[H]
+\centering
+\begin{tabular}{|l|c|c|c}
+\hline
+\textbf{Record Header}   & \multicolumn{1}{l|}{\textbf{Field 1}} & \multicolumn{1}{l|}{\textbf{Field 2}} & \multicolumn{1}{l|}{\textbf{Field ...}} \\ \hline
+\textbf{88} & $E226 − S187$         & $88$          & $John$           \\ \hline
+\textbf{65} & $E226 − S187$         & $65$          & $Jacob$           \\ \hline
+\textbf{55} & $E226 − S187$         & $55$          & $Mark$           \\ \hline
+\end{tabular}
+\label{tab:ex}
+\caption{Record}
+\end{table}
+\subsection{Page}
+Page is the fundamental structure of storage system. Pages holds records. Each page has 2 kb (2048 byte) storage space for records. We have one type of records in each page, so we can easily calculate how much record can fit in one page. Record per page differs based on number of fields for each type. Page header is 20 byte, so we have 2028 bytes for records. Firstly we should calculate space for one record than divide 2028 by it. Page header holds lowest record id and number of empty spaces in this page. We can easily traverse pages in this way.
+\begin{table}[H]
+\centering
+\begin{tabular}{|l|c|c|c}
+\hline
+\textbf{Page Header:}   & \multicolumn{1}{l|}{\textbf{Lowest : 55}} & \multicolumn{1}{l|}{\textbf{Empty spaces : 5}} & \multicolumn{1}{l|}{\textbf{}} \\ \hline
+\textbf{Record header : 88} & $E226 − S187$         & $88$          & $John$           \\ \hline
+\textbf{Record header : 65} & $E226 − S187$         & $65$          & $Jacob$           \\ \hline
+\textbf{Record header : 55} & $E226 − S187$         & $55$          & $Mark$           \\ \hline
+\end{tabular}
+\label{tab:ex}
+\caption{Page}
+\end{table}
+\subsection{File}
+Files have 8 pages. File header holds lowest record id  and number of pages in this file. We can search pages in a for loop with the help of this number. We can also easily see whether a record lies in boundaries of this file with the help of lowest record id.
+\begin{table}[H]
+\centering
+\begin{tabular}{|l|c|c|c}
+\hline
+\textbf{File Header:}   & \multicolumn{1}{l|}{\textbf{Lowest : 55}} & \multicolumn{1}{l|}{\textbf{Page Count : 2}} & \multicolumn{1}{l|}{\textbf{}} \\ \hline
+\textbf{Page header :} & $Lowest : 55$         & $Empty spaces : 5$                     \\ \hline
+\textbf{Record header : 65} & $E226 − S187$         & $65$          & $Jacob$           \\ \hline
+\textbf{Record header : 55} & $E226 − S187$         & $55$          & $Frodo$           \\ \hline
+\textbf{Page header :} & $Lowest : 24$         & $Empty spaces : 2$                     \\ \hline
+\textbf{Record header : 44} & $E226 − S187$         & $445$          & $Harry$           \\ \hline
+\textbf{Record header : 38} & $E226 − S187$         & $38$          & $Mark$           \\ \hline
+\textbf{Record header : 35} & $E226 − S187$         & $35$          & $Ron$           \\ \hline
+\textbf{Record header : 29} & $E226 − S187$         & $29$          & $Bilbo$           \\ \hline
+\textbf{Record header : 24} & $E226 − S187$         & $24$          & $Joe$           \\ \hline
+\end{tabular}
+\label{tab:ex}
+\caption{File}
+\end{table}
+
+\section{Operations}
+\label{sec:operations}
+DDL operations:
+\begin{itemize}
+\item Create Type
+\item Delete Type
+\item Inherit Type
+\item List Type
+\end{itemize}
+DML operations:
+\begin{itemize}
+\item Create Record
+\item Delete Record
+\item Update Record
+\item List Record
+\item Search Record
+\item Filter Record
+\end{itemize}
+
+\subsection{HALO Definition Language Operations}
+
+\begin{algorithm}[H]
+ \item1. Get input from user, which contains "create type" operation and field names
+ \item2. Count field names from input
+ \item3. Control if given number is equal to number of fields. Otherwise print failure to log file.
+\item 4. Check systemcatalog.txt file if given type name exist.
+\item 5. If it exist print failure to log file.
+\item 6. If it does not exist append this type and its fields and 0 as number of files this type has to systemcatalog.txt file and print success to log file. 
+\caption{Create Type}
+\end{algorithm}
+
+\begin{algorithm}[H]
+ \item 1. Get input from user, which contains "delete type" operation.
+ \item 2. Check systemcatalog.txt file if given type name exist.
+ \item 3. If it exist delete that type from systemcatalog.txt file and delete all files of that type and print success to log file.
+\item 4. If it does not exist print failure to log file. 
+\caption{Delete Type}
+\end{algorithm}
+
+\begin{algorithm}[H]
+ \item 1. Get input from user, which contains "inherit type" operation and new type name, old type name and new types' field names.
+ \item 2. Check systemcatalog.txt file if given old type name exist.
+ \item 3. If it exist move to step 5.
+ \item 4. If it does not exist print failure to log file.
+ \item 5. Check systemcatalog.txt file if given new type name exist.
+ \item 6. If it exist print failure to log file.
+\item 7. If it does not exist append this type and its fields and 0 as number of files this type has to systemcatalog.txt file and print success to log file. 
+\caption{Inherit Type}
+\end{algorithm}
+
+\begin{algorithm}[H]
+ \item 1. Get input from user, which contains "list type" operation.
+ \item 2. Read systemcatalog.txt file and print typename if there exist any type.
+\caption{List Type}
+\end{algorithm}
+
+\subsection{HALO Management Language Operations}
+
+\begin{algorithm}[H]
+ \item1. Get input from user, which contains "create record" operation and typename and field values
+ \item2. Count field values from input
+ \item3. Control if given number is equal to number of fields. Otherwise print failure to log file.
+ \item4. Read file count from systemcatalog.txt file for given type name.
+ \item 5. Starting from the last created file check file header for lowest record id in this file. If new record id is smaller, check previous file. Stop if you are in first file.
+ \item 6. Starting from first page in this file, check page header for lowest record id in this file. If new record id is smaller, check next page. Stop if you are in last page in this file. 
+ \item 7. Check if given record id exist in this page.
+ \item 8. If it does not exist append new record to this page  and print success to log file. 
+ \item 9. If this page is full, append record and sort again. Then put lowest record to new page.
+ \item 10. If file is full, put lowest record in file to another file recursively.
+\item 11. If it already exist print failure to log file.
+\caption{Create Record}
+\end{algorithm}
+
+\begin{algorithm}[H]
+ \item1. Get input from user, which contains "delete record" operation and typename and record id
+ \item2. Read file count from systemcatalog.txt file for given type name.
+ \item3.Starting from the last created file check file header for lowest record id in this file. If new record id is smaller, check previous file. Stop if you are in first file.
+ \item 4. Starting from first page in this file, check page header for lowest record id in this file. If new record id is smaller, check next page. Stop if you are in last page in this file. 
+ \item 5. Check if given record id exist in this page.
+ \item 6. If it does not exist print failure to log file. 
+ \item 7. If it exist delete that record from this file and move all records below the deleted record up one line. Print success to log file.
+\caption{Delete Record}
+\end{algorithm}
+
+\begin{algorithm}[H]
+ \item1. Get input from user, which contains "list record" operation and typename.
+ \item2. Read file count from systemcatalog.txt file for given type name.
+ \item 3. If given type does not exist in systemcatalog.txt print failure to log file.
+ \item 4. If it exist read all files of given type and print all records to output file. Print success to log file.
+\caption{List Record}
+\end{algorithm}
+
+\begin{algorithm}[H]
+ \item1. Get input from user, which contains "search record" operation and typename and record id
+ \item2. Read file count from systemcatalog.txt file for given type name.
+ \item 3.Starting from the last created file check file header for lowest record id in this file. If new record id is smaller, check previous file. Stop if you are in first file.
+ \item 5. Starting from first page in this file, check page header for lowest record id in this file. If new record id is smaller, check next page. Stop if you are in last page in this file. 
+ \item 6. Check if given record id exist in this page.
+ \item 4. Check if given record id exist in this file.
+ \item 5. If it does not exist print failure to log file. 
+ \item 6. If it exist print that record to output file. Print success to log file.
+\caption{Search Record}
+\end{algorithm}
+
+\begin{algorithm}[H]
+ \item1. Get input from user, which contains "update record" operation and typename and record id
+ \item2. Read file count from systemcatalog.txt file for given type name.
+ \item 3.Starting from the last created file check file header for lowest record id in this file. If new record id is smaller, check previous file. Stop if you are in first file.
+ \item 4. Starting from first page in this file, check page header for lowest record id in this file. If new record id is smaller, check next page. Stop if you are in last page in this file. 
+ \item 4. Check if given record id exist in this page.
+ \item 5. If it does not exist print failure to log file. 
+ \item 6. If it exist update that record. Print success to log file.
+\caption{Update Record}
+\end{algorithm}
+
+\begin{algorithm}[H]
+ \item1. Get input from user, which contains "filter record" operation and typename and condition.
+ \item2. Read file count from systemcatalog.txt file for given type name.
+ \item 3.Starting from the last created file check all records and if given condition holds for that record print it to the output file.
+ \item 4. Print success to log file.
+\caption{Filter Record}
+\end{algorithm}
+
+
+\section{Conclusion \& Assessment}
+\label{sec:conclusion}
+We tried to implement the design we explained above. We used bytearrays firstly. Unfortunately we could not implement all system like this. We had limited time, so we implemented a working and simpler code. We can not implement page design. 
+\item We implemented system catalog and type systems correctly. But we had to implement record functions in a more basic way due to time constraint.
+\item Our system is working correctly but it is not the way we described above.
+
+\end{document}

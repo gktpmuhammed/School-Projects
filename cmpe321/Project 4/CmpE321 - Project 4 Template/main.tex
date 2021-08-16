@@ -1,0 +1,75 @@
+\documentclass{article}
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage{graphicx}
+\usepackage{algorithm}
+\usepackage{algorithm2e}
+\usepackage{hyperref}
+\usepackage{float}
+%  Include course name, semester, assignment title, your name and student number. 
+\title{Title: A Latex Template}
+\date{\today}
+\author{Student Name \\ Student ID}
+\begin{document}
+\maketitle
+\newpage
+\tableofcontents
+\newpage
+\section{Introduction}
+\label{sec:introduction}
+Briefly describe the project in your own words. 
+\section{Assumptions \& Constraints}
+\label{sec:ass-and-const}
+Clearly specify your assumptions and constraints of the system in an itemized or tabular format. 
+\subsection{Assumptions}
+\begin{itemize}
+    \item Assumption 1
+    \item Assumption 2
+\end{itemize}
+\subsection{Constraints}
+\begin{enumerate}
+    \item A constraint
+    \item Another constraint
+\end{enumerate}
+
+\section{Storage Structures}
+\label{sec:structures}
+Explain your system catalogue, page design, page header, record header etc. with tables/diagrams/figures. 
+
+To generate tables automatically: \url{https://www.tablesgenerator.com/}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|l|c|c|}
+\hline
+\textbf{Model}   & \multicolumn{1}{l|}{\textbf{Validation Scores}} & \multicolumn{1}{l|}{\textbf{Test Score}} \\ \hline
+\textbf{Model 1} & $\mu_1 \pm \delta_1$                   & ts\_1                                    \\ \hline
+\textbf{Model 2} & $\mu_2 \pm \delta_2$                   & ts\_2                                    \\ \hline
+\textbf{Model 3} & $\mu_3 \pm \delta_3$                   & ts\_3                                    \\ \hline
+\end{tabular}
+\label{tab:ex}
+\caption{An example table}
+\end{table}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.8\textwidth]{figures/download.jpg}
+    \caption{An example figure}
+\end{figure}
+
+\section{Operations}
+\label{sec:operations}
+Write your DDL and DML operations in pseudocode by referring to the structures in your design.
+\subsection{HALO Authentication Language Operations}
+
+\subsection{HALO Definition Language Operations}
+
+\subsection{HALO Management Language Operations}
+
+\section{R \& D Discussions}
+
+\section{Conclusion \& Assessment}
+\label{sec:conclusion}
+Evaluate your design, considering its ups and downs. 
+
+\end{document}
