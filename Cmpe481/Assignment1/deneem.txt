@@ -1,0 +1,213 @@
+import random
+import matplotlib.pyplot as plt
+import numpy as np
+from sklearn.cluster import KMeans
+from sklearn.datasets import make_blobs
+from sklearn.datasets import make_moons
+from sklearn.metrics import silhouette_score
+
+
+def create_2d_dataset(sample_size, k, cluster_mode):
+    if cluster_mode == "convex":
+        X, y = make_blobs(n_samples=sample_size, centers=k, n_features=2, random_state=0)
+    elif cluster_mode == "nonconvex":
+        X, y = make_moons(n_samples=sample_size, random_state=0)
+    return X, y
+
+
+def scikit_kmeans_func(sample_size, k, convexity):
+    fig, ax = plt.subplots(1, 1)
+    X, y = create_2d_dataset(sample_size, k, convexity)
+
+    km = KMeans(n_clusters=k, init='random', n_init=10, max_iter=300, tol=1e-04, random_state=0)
+    y_km = km.fit_predict(X)
+    allColors = ["red", "green", "blue", "yellow", "pink", "brown", "purple", "olive", "cyan", "honeydew"]
+    colors = allColors[:k]
+    for idd in range(len(X)):
+        plt.scatter(X[idd, 0], X[idd, 1], color=colors[y_km[idd]], s=20)
+
+    plt.scatter(km.cluster_centers_[:, 0], km.cluster_centers_[:, 1], c=colors, marker='x', s=50)
+
+    print("Scikit learn k=", k, " centers:")
+    print(km.cluster_centers_)
+    plt.grid()
+    plt.show()
+
+    return plt
+
+
+def assign_centroids(center_num):
+    np.random.seed(100)
+    centroids = np.random.rand(center_num, 2) * 15
+    return centroids
+
+
+def plot_graph(dataset, centers, i, point_centers, plot_type, ax, colors):
+    if plot_type == "a":
+        plot_num = 2 * (i + 2) - 2
+    else:
+        plot_num = 2 * (i + 2) - 1
+    row = plot_num // 4
+    col = plot_num % 4
+    for idd in range(len(dataset)):
+        ax[row, col].scatter(dataset[idd, 0], dataset[idd, 1], color=colors[point_centers[idd]], s=20)
+
+    ax[row, col].scatter(centers[:, 0], centers[:, 1], c=colors, marker='x', s=50)
+
+    if i >= 3:
+        title = "Iteration final step "
+    else:
+        title = "Iteration " + str(i + 1) + " step " + str(i + 1) + plot_type
+
+    ax[row, col].set_title(title)
+    ax[row, col].grid()
+
+
+def calcul_centers(dataset, k, point_centers):
+    new_centers = np.zeros((k, 2))
+    centers = np.zeros((k, 2))
+    elem_count = [0] * k
+    for idx in range(len(point_centers)):
+        new_centers[point_centers[idx]] = np.add(new_centers[point_centers[idx]], dataset[idx])
+        elem_count[point_centers[idx]] += 1
+    for ix in range(len(elem_count)):
+        if elem_count[ix]:
+            centers[ix] = new_centers[ix] / elem_count[ix]
+
+    return centers
+
+
+def kmeans(sample_size, k, convexity):
+    fig, ax = plt.subplots(3, 4)
+    dataset, y = create_2d_dataset(sample_size, k, convexity)
+    ax[0, 0].scatter(dataset[:, 0], dataset[:, 1], color="black", s=20)
+    ax[0, 0].set_title("Dataset and Initial Centers")
+    allColors = ["red", "green", "blue", "yellow", "pink", "brown", "purple", "olive", "cyan", "honeydew"]
+    colors = allColors[:k]
+    point_centers = list()
+    random.seed(50)
+    for r in range(len(dataset)):
+        point_centers.append(random.randint(0, k - 1))
+
+    for idd in range(len(dataset)):
+        ax[0, 1].scatter(dataset[idd, 0], dataset[idd, 1], color=colors[point_centers[idd]], s=20)
+
+    ax[0, 1].set_title("Step 1")
+
+    obj_fun = 2 ** 29
+    i = 0
+    obj_fun_list_x = list()
+    obj_fun_list_y = list()
+
+    while True:
+        centers = calcul_centers(dataset, k, point_centers)
+        if i < 3:
+            plot_graph(dataset, centers, i, point_centers, "a", ax, colors)
+
+        old_obj_fun = obj_fun
+        obj_fun = 0
+        for point_index in range(len(dataset)):
+            a = list()
+            for j in range(k):
+                a.append(np.sum(np.square(dataset[point_index] - centers[j])))
+
+            min_index = np.argmin(a)
+            point_centers[point_index] = min_index
+            obj_fun += a[min_index]
+
+        obj_fun_list_x.append(i + 1)
+        obj_fun_list_y.append(obj_fun)
+
+        if i < 3:
+            plot_graph(dataset, centers, i, point_centers, "b", ax, colors)
+
+        i += 1
+
+        diff = old_obj_fun - obj_fun
+        if diff < 0.0001:
+            break
+
+    plot_graph(dataset, centers, 3, point_centers, "a", ax, colors)
+    ax[2, 1].plot(obj_fun_list_x, obj_fun_list_y)
+    ax[2, 1].plot(obj_fun_list_x, obj_fun_list_y, marker="o")
+    print("Kmeans k=", k, " centers:")
+    print(centers)
+    return plt
+
+
+def find_best_k_elbow(sample_size, k, convexity):
+    # This method was called Elbow method.
+    # This code was taken from
+    # https://www.geeksforgeeks.org/ml-determine-the-optimal-value-of-k-in-k-means-clustering/
+    fig, ax = plt.subplots(1, 1)
+    dataset, y = create_2d_dataset(sample_size, k, convexity)
+    cost = []
+    for i in range(1, 11):
+        KM = KMeans(n_clusters=i, max_iter=500)
+        KM.fit(dataset)
+
+        # calculates squared error
+        # for the clustered points
+        cost.append(KM.inertia_)
+
+        # plot the cost against K values
+    plt.plot(range(1, 11), cost, color='g', linewidth='3')
+    plt.xlabel("Value of K")
+    plt.ylabel("Squared Error (Cost)")
+    plt.title("Elbow Method")
+
+    # the point of the elbow is the
+    # most optimal value for choosing k
+    return plt
+
+
+def find_best_k_silhouette(sample_size, k, convexity):
+    # This code was taken from
+    # https://medium.com/analytics-vidhya/how-to-determine-the-optimal-k-for-k-means-708505d204eb
+    fig, ax = plt.subplots(1, 1)
+    dataset, y = create_2d_dataset(sample_size, k, convexity)
+    sil = []
+    kmax = 10
+
+    # dissimilarity would not be defined for a single cluster, thus, minimum number of clusters should be 2
+    for k in range(2, kmax + 1):
+        kmeansss = KMeans(n_clusters=k).fit(dataset)
+        labels = kmeansss.labels_
+        sil.append(silhouette_score(dataset, labels, metric='euclidean'))
+    plt.plot(range(2, 11), sil, color='g', linewidth='3')
+    min_index = np.argmax(sil)
+    index = min_index + 2
+    plt.xlabel("Value of K")
+    plt.ylabel("Silhouette Score")
+    plt.title("Silhouette Method")
+    return plt, index
+
+
+def kmeans_con(k, convexity):
+    size = 200
+    plt_a = kmeans(size, k, convexity)
+    plt_c = scikit_kmeans_func(size, k, convexity)
+    plt_d = find_best_k_elbow(size, k, convexity)
+    plt_e, best_k = find_best_k_silhouette(size, k, convexity)
+    print("Optimal k value for this dataset is: ", best_k)
+    # plt_b = kmeans(size, 7, convexity)
+    # plt_f = scikit_kmeans_func(size, 7, convexity)
+
+    plt_a.show()
+    plt_c.show()
+    plt_d.show()
+    plt_e.show()
+    # plt_b.show()
+    # plt_f.show()
+
+
+def main():
+    kmeans_con(3, "convex")
+    kmeans_con(7, "convex")
+    kmeans_con(2, "nonconvex")
+
+
+if __name__ == '__main__':
+    main()
+
+# TODO optimal k bulma algoritmaları k value retrun etmeli.
