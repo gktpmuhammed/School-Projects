@@ -14,3 +14,7 @@ https://www.cmpe.boun.edu.tr/undergraduate/curriculum
  | Cmpe322 |  Operating Systems                                         | _C, C++, Linux, POSIX_  
  | Cmpe352 |  Software Engineering		                                    | _Github, Backend, Django_   
  | Cmpe362 |  Signal Processing 		                                      | _Matlab, Signal Processing_
+ | Cmpe481 |  Data Analysis and Visualization	                          | _Python, Clustering, Decision Trees_
+ | Cmpe483 |  Sp. Tp. Blockchain Programming 		                         | _Solidity, Smart Contracts_
+ | Cmpe493 |  Introduction to Information Retrieval 		                  | _Python, Naive Bayes, KNN_
+ | Cmpe462 |  Machine Learning		                                        | _Python, SVM_
